@@ -1,0 +1,65 @@
+/* Fondo general de la página */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #313338; 
+  }
+  
+  /* Caja del login */
+  .login-box {
+    background-color: #1e1f22; /* Caja oscura */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    text-align: center;
+  }
+  
+  /* Título del login */
+  .login-box h2 {
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Inputs de email y password */
+  .login-box input {
+    width: 80%;  
+    max-width: 300px; 
+    padding: 12px;
+    margin: 10px auto;
+    display: block; 
+    border: 1px solid #3a3a3d;
+    background-color: #2b2d31;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  /* Botón de login */
+  .login-box button {
+    width: 82%;
+    padding: 12px;
+    background-color: #5865f2; 
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .login-box button:hover {
+    background-color: #4752c4;
+  }
+  
+  /* Para mejorar la apariencia en móviles */
+  @media (max-width: 600px) {
+    .login-box {
+      width: 90%;
+    }
+  }
+  
