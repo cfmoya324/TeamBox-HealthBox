@@ -1,4 +1,4 @@
-# Proyecto informático
+# Proyecto informático 1
 
 ## HealthBox
 
@@ -10,5 +10,6 @@ Integrantes de TeamBox:
 - Camilo Franco Moya
 
 ## Comandos a tener en cuenta back y front
-- npm install express cors bcryptjs jsonwebtoken
-- npm install react-router-dom axios
+
+- `npm install`: Descarga las dependencias de cada proyecto.
+- `npm start`: Ejecuta el proyecto en modo de desarrollo.
