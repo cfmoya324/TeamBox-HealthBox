@@ -1,0 +1,45 @@
+.admin-container {
+    background-color: #f4f6f9;
+    padding: 30px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Título principal */
+  .admin-container h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  /* Estilo para el texto del panel */
+  .admin-container p {
+    font-size: 1.1rem;
+    color: #34495e;
+    line-height: 1.6;
+    text-align: center;
+  }
+  
+  /* Botón de acción */
+  .admin-container .action-button {
+    display: block;
+    width: 200px;
+    margin: 30px auto;
+    padding: 12px;
+    background-color: #f39c12;
+    color: white;
+    text-align: center;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .admin-container .action-button:hover {
+    background-color: #e67e22;
+  }

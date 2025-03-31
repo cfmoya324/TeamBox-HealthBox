@@ -1,12 +1,19 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/navbarr";
+import Navbar from "./components/navbar";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 import Auditor from "./pages/Auditor";
 import Supervisor from "./pages/Supervisor";
 import Trabajador from "./pages/Trabajador";
 import Dashboard from "./pages/Dashboard";
+
+// Import de los estilos;
+import "./styles/navbar.css";
+import "./styles/Admin.css";
+import "./styles/Auditor.css";
+import "./styles/Supervisor.css";
+import "./styles/Trabajador.css";
 
 function App() {
   return (

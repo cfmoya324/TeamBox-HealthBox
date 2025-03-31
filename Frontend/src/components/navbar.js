@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../styles/navbar.css";
 
-function navbar() {
+function Navbar() {
   return (
     <nav>
       <Link to="/">Login</Link> | <Link to="/dashboard">Dashboard</Link>
@@ -9,4 +10,4 @@ function navbar() {
   );
 }
 
-export default navbar;
+export default Navbar;

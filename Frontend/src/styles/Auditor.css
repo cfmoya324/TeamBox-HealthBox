@@ -1,0 +1,26 @@
+.auditor-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f4f6f7;
+    padding: 20px;
+  }
+  
+  /* Estilos para el título */
+  .auditor-container h2 {
+    font-size: 26px;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  /* Estilos para el párrafo */
+  .auditor-container p {
+    font-size: 18px;
+    color: #34495e;
+    text-align: center;
+    max-width: 600px;
+    line-height: 1.5;
+  }

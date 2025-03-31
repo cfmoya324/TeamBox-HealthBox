@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/Dashboard.css"; 
 
 function Dashboard() {
   const role = localStorage.getItem("role");
@@ -12,7 +13,7 @@ function Dashboard() {
   };
 
   return (
-    <div>
+    <div className="dashboard-container">
       <h2>Bienvenido, tu rol es: {role}</h2>
       <button onClick={handleLogout}>Cerrar sesión</button>
     </div>
