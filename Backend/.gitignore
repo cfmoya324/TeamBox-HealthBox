@@ -49,3 +49,11 @@ yarn-error.log
 # System files
 .DS_Store
 Thumbs.db
+
+#URI MongoDB
+.env
+
+#Usuarios de prueba
+usuarios_prueba.json
+
+
