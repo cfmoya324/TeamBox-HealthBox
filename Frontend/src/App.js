@@ -8,13 +8,15 @@ import Auditor from "./pages/Auditor";
 import Supervisor from "./pages/Supervisor";
 import Trabajador from "./pages/Trabajador";
 import Dashboard from "./pages/Dashboard";
+import AdminUsuarios from "./pages/AdminUsuarios";
 
-// Import de los estilos;
+// Estilos
 import "./styles/navbar.css";
 import "./styles/Admin.css";
 import "./styles/Auditor.css";
 import "./styles/Supervisor.css";
 import "./styles/Trabajador.css";
+import "./styles/AdminUsuarios.css";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route path="/supervisor" element={<Supervisor />} />
         <Route path="/trabajador" element={<Trabajador />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/paneladmin" element={<AdminUsuarios />} />
+        <Route path="/paneltrabajador" element={<Trabajador />} /> {/* Nueva ruta */}
       </Routes>
     </Router>
   );
