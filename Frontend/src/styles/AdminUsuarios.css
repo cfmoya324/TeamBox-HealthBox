@@ -1,97 +1,130 @@
 .admin-container {
-    padding: 2rem;
-    font-family: Arial, sans-serif;
-    max-width: 1000px;
-    margin: auto;
-  }
-  
-  .admin-title {
-    font-size: 24px;
-    margin-bottom: 1rem;
-    text-align: center;
-    color: #333;
-  }
-  
-  .admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 2rem;
-  }
-  
-  .admin-table th,
-  .admin-table td {
-    border: 1px solid #ccc;
-    padding: 8px 12px;
-    text-align: left;
-  }
-  
-  .admin-table th {
-    background-color: #f4f4f4;
-  }
-  
-  .admin-actions button {
-    margin-right: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .editar {
-    background-color: #ffc107;
-    border: none;
-    color: white;
-  }
-  
-  .eliminar {
-    background-color: #dc3545;
-    border: none;
-    color: white;
-  }
-  
-  .guardar {
-    background-color: #28a745;
-    border: none;
-    color: white;
-  }
-  
-  .crear {
-    background-color: #007bff;
-    border: none;
-    color: white;
-    margin-top: 10px;
-    padding: 8px 15px;
-  }
-  
-  .admin-form input {
-    display: block;
-    margin-bottom: 10px;
-    padding: 8px;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .subida-informe,
-.lista-informes {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
-  margin-bottom: 30px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  max-width: 1000px;
+  margin: auto;
+  background: #f7f9fc;
+  border-radius: 12px;
 }
 
-.subida-informe h3,
-.lista-informes h3 {
+.admin-title {
+  font-size: 26px;
+  margin-bottom: 1.5rem;
+  text-align: center;
   color: #2c3e50;
-  margin-bottom: 10px;
 }
 
-.lista-informes ul {
-  list-style: none;
-  padding: 0;
+.admin-input {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.lista-informes li {
-  padding: 5px 0;
-  border-bottom: 1px solid #ddd;
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.admin-table th,
+.admin-table td {
+  border: 1px solid #ccc;
+  padding: 10px 12px;
+  text-align: left;
+  background-color: #fff;
+}
+
+.admin-table th {
+  background-color: #ecf0f1;
+  color: #2c3e50;
+}
+
+.admin-actions button {
+  margin-right: 5px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.editar {
+  background-color: #ffc107;
+  color: white;
+  margin-left: 5px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.eliminar {
+  background-color: #dc3545;
+  color: white;
+  margin-left: 5px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.guardar {
+  background-color: #28a745;
+  color: white;
+  margin-left: 5px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.crear {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.admin-form {
+  max-width: 400px;
+  margin: auto;
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  cursor: pointer;
+}
+
+.cancelar {
+  background-color: #dc3545;
+  color: white;
+  margin-left: 5px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.volver {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  margin-top: 15px;
+  cursor: pointer;
+  border-radius: 5px;
 }

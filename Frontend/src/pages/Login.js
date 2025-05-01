@@ -19,8 +19,8 @@ function Login() {
 
       // 🔹 Redirigir según el rol del usuario
       switch (res.data.role) {
-        case "admin":
-          navigate("/admin");
+        case "administrador":
+          navigate("/administrador");
           break;
         case "auditor":
           navigate("/auditor");
