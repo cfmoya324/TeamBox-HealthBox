@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/user.model");
-
+const { sendEmail } = require("../utils/emailService");
 exports.registerUser = async (req, res) => {
   try {
     const { fullName, email, password } = req.body;
@@ -19,6 +19,21 @@ exports.registerUser = async (req, res) => {
     });
 
     const saved = await newUser.save();
+
+    // Enviar correo de bienvenida
+    await sendEmail(
+      email,
+      "Bienvenido a HealthBox",
+      `
+        <div style="font-family: Arial, sans-serif; color: #333;">
+          <h2>Bienvenido a <span style="color:#007bff">HealthBox</span>, ${fullName}</h2>
+          <p>Tu cuenta ha sido registrada exitosamente.</p>
+          <p>Puedes iniciar sesión ahora y comenzar a usar la plataforma.</p>
+          <hr />
+          <small>Este mensaje fue generado automáticamente. No respondas a este correo.</small>
+        </div>
+      `
+    );
 
     res.status(201).json({
       message: "Usuario registrado exitosamente.",
@@ -68,6 +83,21 @@ exports.deleteUser = async (req, res) => {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
 
+    // Notificar por correo al usuario eliminado
+    await sendEmail(
+      deleted.email,
+      "Cuenta eliminada - HealthBox",
+      `
+        <div style="font-family: Arial, sans-serif; color: #333;">
+          <h2>Hola ${deleted.fullName},</h2>
+          <p>Te informamos que tu cuenta en <strong>HealthBox</strong> ha sido eliminada.</p>
+          <p>Si crees que esto fue un error, por favor contacta con el administrador del sistema.</p>
+          <hr />
+          <small>Este mensaje fue generado automáticamente. No respondas a este correo.</small>
+        </div>
+      `
+    );
+
     res.status(200).json({ message: "Usuario eliminado" });
   } catch (error) {
     console.error("❌ Error al eliminar usuario:", error);
@@ -87,6 +117,21 @@ exports.updateUserRole = async (req, res) => {
 
     const updated = await User.findByIdAndUpdate(id, { role }, { new: true });
     if (!updated) return res.status(404).json({ message: "Usuario no encontrado" });
+
+    // Enviar correo de notificación de cambio de rol
+    await sendEmail(
+      updated.email,
+      "Actualización de Rol en HealthBox",
+      `
+        <div style="font-family: Arial, sans-serif; color: #333;">
+          <h2>Hola ${updated.fullName},</h2>
+          <p>Tu rol en la plataforma <strong>HealthBox</strong> ha sido actualizado a: <strong>${role}</strong>.</p>
+          <p>Accede nuevamente al sistema para ver los cambios reflejados.</p>
+          <hr />
+          <small>Este mensaje fue generado automáticamente. No respondas a este correo.</small>
+        </div>
+      `
+    );
 
     res.status(200).json({ message: "Rol actualizado correctamente", user: updated });
   } catch (error) {
