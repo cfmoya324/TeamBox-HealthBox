@@ -10,20 +10,14 @@ import Trabajador from "./pages/Trabajador";
 import Dashboard from "./pages/Dashboard";
 import AdminUsuarios from "./pages/AdminUsuarios";
 
-// Estilos
-import "./styles/navbar.css";
-import "./styles/Admin.css";
-import "./styles/Auditor.css";
-import "./styles/Supervisor.css";
-import "./styles/Trabajador.css";
-import "./styles/AdminUsuarios.css";
 
 function App() {
   return (
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Login />} />
+      <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/administrador" element={<Admin />} />
         <Route path="/auditor" element={<Auditor />} />

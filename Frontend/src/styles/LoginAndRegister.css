@@ -1,0 +1,110 @@
+/* Fondo general de la página */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container > div {
+  width: 90%;
+  min-width: 100px;
+}
+
+/* Caja del login */
+.login-box {
+  margin: auto;
+  background-color: #F3F3F3;
+  padding: 1rem;
+  border-radius: 3rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Título del login */
+.login-box h2 {
+  margin-bottom: 10px;
+}
+
+/* Inputs de email y password */
+.login-box input {
+  width: 85%;
+  padding: 8px;
+  margin: 10px auto;
+  display: block;
+  border: 1px solid #D9D9D9;
+  background-color: white;
+  border-radius: 1rem;
+  font-size: 1.1rem;
+}
+
+.show-password {
+  position: relative;
+}
+
+.show-password > span {
+  position: absolute;
+  right: 35px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ccc;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+/* Botón de login */
+.login-box button {
+  width: 90%;
+  padding: 15px;
+  background-color: #383542;
+  color: white;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-box button:hover {
+  background-color: #593964;
+}
+
+.no-cuenta {
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* móviles */
+@media (min-width: 768px) {
+  .login-container {
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: right center;
+    background-size: 500px 100%;
+  }
+  .login-background {
+    background-image: url("../assets/login-background.jpg");
+  }
+  .register-background {
+    background-image: url("../assets/register-background.jpg");
+  }
+}
+
+@media (min-width: 992px) {
+  .login-container {
+    background-size: 650px 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .login-container {
+    background-size: 800px 100%;
+  }
+}
