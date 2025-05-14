@@ -9,7 +9,7 @@ import Supervisor from "./pages/Supervisor";
 import Trabajador from "./pages/Trabajador";
 import Dashboard from "./pages/Dashboard";
 import AdminUsuarios from "./pages/AdminUsuarios";
-
+import SelfAssessment from "./pages/SelfAssessment";
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/paneladmin" element={<AdminUsuarios />} />
         <Route path="/paneltrabajador" element={<Trabajador />} /> {/* Nueva ruta */}
+        <Route path="/autoevaluacion" element={<SelfAssessment />} />
       </Routes>
     </Router>
   );

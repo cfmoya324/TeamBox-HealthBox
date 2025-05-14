@@ -16,7 +16,7 @@ export default function AdminUsuarios() {
   useEffect(() => {
     const role = localStorage.getItem("role");
     if (role !== "administrador") {
-      alert("⚠️ Acceso denegado. Solo administradores.");
+      alert("⚠️ Acceso denegado. Solo administradores pueden entrar.");
       navigate("/");
     }
     fetchUsuarios();

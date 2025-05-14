@@ -9,12 +9,13 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const sendEmail = async (to, subject, htmlContent) => {
+const sendEmail = async (to, subject, htmlContent, attachments = []) => {
   const mailOptions = {
     from: `"HealthBox Notificaciones" <${process.env.SMTP_USER}>`,
     to,
     subject,
     html: htmlContent,
+    attachments,
   };
 
   try {
