@@ -58,14 +58,9 @@
 /* Botón de login */
 .login-box button {
   width: 90%;
-  padding: 15px;
   background-color: #383542;
-  color: white;
-  font-size: 1.3rem;
-  border: none;
+  font-size: 1.2rem;
   border-radius: 1.5rem;
-  cursor: pointer;
-  transition: background 0.3s;
 }
 
 .login-box button:hover {

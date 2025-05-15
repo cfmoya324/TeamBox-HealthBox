@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 
 const QuestionSchema = new mongoose.Schema({
   text: String,
+  isAnswered: Boolean,
   type: { type: String, enum: ["abierta", "si_no", "escala"], default: "si_no" },
+  standard: { type: String, enum: ['ISO 45001', 'ISO 9001', 'ISO 27001'], default: "ISO 45001"},
   response: String,
 });
 
@@ -13,4 +15,7 @@ const SelfAssessmentSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model("SelfAssessment", SelfAssessmentSchema);
+module.exports = {
+  defaultQuestions: mongoose.model("SAQuestion", QuestionSchema),
+  SelfAssessment: mongoose.model("SelfAssessment", SelfAssessmentSchema)
+};

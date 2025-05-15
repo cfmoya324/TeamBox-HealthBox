@@ -5,11 +5,12 @@ import "../styles/navbar.css";
 function Navbar() {
   return (
     <nav>
-      <Link to="/">Login</Link> |{" "}
-      <Link to="/dashboard">Dashboard</Link> |{" "}
-      <Link to="/paneladmin">Panel de Administrador</Link> |{" "}
+      <Link to="/login">Login</Link>
+      <Link to="/dashboard">Dashboard</Link>
+      <Link to="/paneladmin">Panel de Administrador</Link>
       <Link to="/autoevaluacion">Panel de Auditor</Link>
       <Link to="/paneltrabajador">Panel de Trabajador</Link>
+      <Link to="/supervisor">Supervisor</Link>
     </nav>
   );
 }

@@ -5,8 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #D8D0E3; 
-  color: #111;
+  background-color: #D8D0E3;
+  color: #303030;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  color: #3d2c50;
 }
 
 a {
@@ -24,6 +28,15 @@ a:hover {
   transform: scale(1.05);
 }
 
+button {
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
 nav {
   background-color: #F3F3F3;
   padding: 12px 20px;
@@ -31,6 +44,15 @@ nav {
   justify-content: center;
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+select, textarea, input[type="range"] {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 10px;
+  color: #3d2c50;
+  border: 1px solid #D9D9D9;
+  background-color: #F3F3F3;
 }
 
 code {

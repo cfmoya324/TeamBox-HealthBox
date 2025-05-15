@@ -1,26 +1,30 @@
 .auto-container {
   max-width: 800px;
-  margin: 40px auto;
+  margin: 40px 10px;
   padding: 30px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  font-family: "Segoe UI", sans-serif;
+  background-color: #F3F3F3;
+  border-radius: 2.5rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .auto-container h2 {
   text-align: center;
-  color: #2c3e50;
   margin-bottom: 20px;
 }
 
 .standard-selector {
-  display: block;
-  margin: 0 auto 30px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.standard-selector select {
   padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 16px;
+  margin-left: 10px;
+  font-size: 20px;
+  background-color: white;
+
 }
 
 .form-auto {
@@ -30,27 +34,24 @@
 }
 
 .question-block {
-  background-color: #fff;
+  background-color: white;
   padding: 15px 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid #D9D9D9;
+  border-radius: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .question-block label {
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
-  color: #333;
+
 }
 
 .question-block select,
 .question-block textarea,
 .question-block input[type="range"] {
   width: 100%;
-  padding: 8px;
-  font-size: 14px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
   box-sizing: border-box;
 }
 
@@ -60,18 +61,13 @@ textarea {
 }
 
 .submit-btn {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  background-color: #383542;
+  font-size: 1.2rem;
+  border-radius: 1.4rem;
 }
 
 .submit-btn:hover {
-  background-color: #0056b3;
+  background-color: #593964;
 }
 
 .msg {
@@ -126,16 +122,21 @@ textarea {
   justify-content: space-between;
   margin-top: 5px;
   font-size: 0.85rem;
-  color: #333;
 }
 .scale-label {
   width: 20%;
   text-align: center;
+  rotate: 45deg;
+  padding-bottom: 1rem;
 }
 
-
-
-
-
-
-
+@media (min-width: 768px) {
+  .auto-container {
+    margin: 40px auto;
+  }
+  
+  .scale-label {
+    rotate: 0deg;
+    padding: 0rem;
+  }
+}

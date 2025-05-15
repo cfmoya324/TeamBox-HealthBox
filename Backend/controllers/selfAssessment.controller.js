@@ -1,5 +1,4 @@
-const SelfAssessment = require("../models/selfAssessment.model");
-const defaultQuestions = require("../data/defaultQuestions");
+const {defaultQuestions, SelfAssessment} = require("../models/selfAssessment.model");
 const { sendEmail } = require("../utils/emailService");
 const { generateSelfAssessmentPDF } = require("../utils/pdfGenerator");
 const User = require("../models/user.model");
@@ -31,15 +30,28 @@ exports.getAssessmentsByUser = async (req, res) => {
   }
 };
 
-exports.getDefaultQuestions = (req, res) => {
-  const { standard } = req.params;
-  console.log("✅ Solicitando preguntas para:", standard);
-  const questions = defaultQuestions[standard];
-  console.log("❓ Preguntas encontradas:", defaultQuestions[standard]);
-  if (!questions) {
-    return res.status(404).json({ message: `No hay preguntas predefinidas para ${standard}` });
+exports.getDefaultQuestions = async (req, res) => {
+  try {
+    const { standard } = req.params;
+    console.log("✅ Solicitando preguntas para:", standard);
+    const questionsRaw = await defaultQuestions.find({standard: standard, isAnswered: false}).lean();
+
+    if (!questionsRaw) {
+      return res.status(404).json({ message: `No hay preguntas predefinidas para ${standard}` });
+    }
+
+    let questions = [];
+
+    for (let question of questionsRaw) {
+      questions.push({...question, isAnswered: true })
+    }
+    console.log("❓ Preguntas encontradas:", questions);
+    res.status(200).json({ standard, questions });
+
+  } catch (error) {
+    console.error("❌ Error en preguntas de autoevaluación:", error);
+    res.status(500).json({ message: "Error en preguntas de autoevaluación." });
   }
-  res.status(200).json({ standard, questions });
 };
 
 exports.exportAssessmentAndSend = async (req, res) => {
@@ -55,12 +67,13 @@ exports.exportAssessmentAndSend = async (req, res) => {
 
     await sendEmail(
       user.email,
-      "📄 Tu Autoevaluación HealthBox en PDF",
+      "📄 Tu autoevaluación de HealthBox en PDF",
       `<p>Hola ${user.fullName},<br>Adjuntamos el PDF con tu autoevaluación realizada en HealthBox.</p>`,
       [{ filename: "autoevaluacion.pdf", path: outputPath }]
     );
 
     res.status(200).json({ message: "PDF generado y enviado por correo" });
+
   } catch (error) {
     console.error("❌ Error exportando PDF:", error);
     res.status(500).json({ message: "Error al generar y enviar el PDF" });

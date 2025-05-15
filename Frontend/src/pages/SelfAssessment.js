@@ -8,6 +8,7 @@ function SelfAssessment() {
   const [questions, setQuestions] = useState([]);
   const [responses, setResponses] = useState({});
   const [mensaje, setMensaje] = useState("");
+  const [enviarCorreo, setEnviarCorreo] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,6 +32,7 @@ function SelfAssessment() {
         setQuestions(res.data.questions);
         setResponses({});
         setMensaje("");
+
       } catch (error) {
         console.error("❌ Error cargando preguntas:", error);
       }
@@ -63,9 +65,14 @@ function SelfAssessment() {
         }
       );
       setMensaje("✅ Autoevaluación guardada exitosamente.");
+
+      if (enviarCorreo) {
+        exportarPDF();
+      }
+
     } catch (error) {
-      console.error("❌ Error al enviar autoevaluación:", error);
-      setMensaje("❌ Error al guardar la autoevaluación.");
+      console.error("❌ Error al guardar la autoevaluación:", error);
+      alert("❌ Error al guardar la autoevaluación.");
     }
   };
 
@@ -80,7 +87,7 @@ function SelfAssessment() {
           },
         }
       );
-      alert("📧 Autoevaluación exportada y enviada por correo.");
+      setMensaje("✅📧 Autoevaluación guardada, exportada y enviada por correo.");
     } catch (error) {
       console.error("❌ Error exportando PDF:", error);
       alert("❌ Error al exportar la autoevaluación.");
@@ -93,15 +100,17 @@ function SelfAssessment() {
     <div className="auto-container">
       <h2>Autoevaluación - {standard}</h2>
 
-      <select
-        value={standard}
-        onChange={(e) => setStandard(e.target.value)}
-        className="standard-selector"
-      >
-        <option value="ISO 45001">ISO 45001</option>
-        <option value="ISO 9001">ISO 9001</option>
-        <option value="ISO 27001">ISO 27001</option>
-      </select>
+      <div className="standard-selector">
+        <span>Norma<br/>escogida:</span>
+
+        <select value={standard}
+            onChange={(e) => setStandard(e.target.value)}>
+
+          <option value="ISO 45001">ISO 45001</option>
+          <option value="ISO 9001">ISO 9001</option>
+          <option value="ISO 27001">ISO 27001</option>
+        </select>
+      </div>
 
       <form onSubmit={handleSubmit} className="form-auto">
         {questions.map((q, i) => (
@@ -140,27 +149,27 @@ function SelfAssessment() {
             )}
           </div>
         ))}
+
+        <div>
+          <input type="checkbox" id="correo" name="correo" 
+            value={enviarCorreo} onChange={(e) => setEnviarCorreo(e.target.checked)} />
+          <label for="correo"> Exportar evaluación a PDF y enviarlo a tu correo.</label>
+        </div>
+
         <button type="submit" className="submit-btn">
-          Enviar Autoevaluación
+          Enviar autoevaluación
         </button>
       </form>
 
       <div className="buttons-container">
-        <button className="export-btn" onClick={exportarPDF}>
-          Exportar PDF por correo
-        </button>
         <button className="volver" onClick={() => navigate("/auditor")}>
           Volver al Panel del auditor
         </button>
       </div>
 
-      {mensaje && <p className="msg">{mensaje}</p>}
+      {mensaje !== '' ? (<p className="msg">{mensaje}</p>):(<span/>)}
     </div>
   );
 }
 
 export default SelfAssessment;
-
-
-
-
