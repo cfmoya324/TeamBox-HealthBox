@@ -153,7 +153,7 @@ function SelfAssessment() {
         <div>
           <input type="checkbox" id="correo" name="correo" 
             value={enviarCorreo} onChange={(e) => setEnviarCorreo(e.target.checked)} />
-          <label for="correo"> Exportar evaluación a PDF y enviarlo a tu correo.</label>
+          <label htmlFor="correo"> Exportar evaluación a PDF y enviarlo a tu correo.</label>
         </div>
 
         <button type="submit" className="submit-btn">
