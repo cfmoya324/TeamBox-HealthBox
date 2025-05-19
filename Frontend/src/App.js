@@ -10,6 +10,7 @@ import Trabajador from "./pages/Trabajador";
 import Dashboard from "./pages/Dashboard";
 import AdminUsuarios from "./pages/AdminUsuarios";
 import SelfAssessment from "./pages/SelfAssessment";
+import AdminPreguntas from "./pages/AdminPreguntas";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/paneladmin" element={<AdminUsuarios />} />
         <Route path="/paneltrabajador" element={<Trabajador />} /> {/* Nueva ruta */}
         <Route path="/autoevaluacion" element={<SelfAssessment />} />
+        <Route path="/preguntas" element={<AdminPreguntas />} />
       </Routes>
     </Router>
   );

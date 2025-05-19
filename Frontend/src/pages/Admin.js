@@ -1,3 +1,4 @@
+// src/pages/Admin.js
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Admin.css";
@@ -5,18 +6,22 @@ import "../styles/Admin.css";
 function Admin() {
   const navigate = useNavigate();
 
-  const handleGestionUsuarios = () => {
-    navigate("/paneladmin");
-  };
-
   return (
     <div className="admin-container">
       <h2>Panel de Administrador</h2>
       <p>Aquí puedes gestionar usuarios y permisos.</p>
-      {/* Botón para futuras acciones*/}
-      <button className="action-button" onClick={handleGestionUsuarios}>Gestionar Usuarios</button>
+
+      <div className="admin-buttons">
+        <button className="action-button" onClick={() => navigate("/paneladmin")}>
+          Gestionar Usuarios
+        </button>
+        <button className="action-button" onClick={() => navigate("/preguntas")}>
+          Gestionar Preguntas
+        </button>
+      </div>
     </div>
   );
 }
 
 export default Admin;
+
