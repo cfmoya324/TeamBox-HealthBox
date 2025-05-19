@@ -16,7 +16,7 @@ function Admin() {
           Gestionar Usuarios
         </button>
         <button className="action-button" onClick={() => navigate("/preguntas")}>
-          Gestionar Preguntas
+          Gestionar Normativas y Preguntas
         </button>
       </div>
     </div>

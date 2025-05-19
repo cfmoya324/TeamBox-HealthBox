@@ -37,6 +37,13 @@ function SelfAssessment() {
 
   // Cargar preguntas cada vez que cambie la normativa seleccionada
   useEffect(() => {
+    const role = localStorage.getItem("role");
+    if (role !== "auditor") {
+      alert("⚠️ Acceso denegado. Solo auditores pueden entrar.");
+      navigate("/");
+      return;
+    }
+
     if (!standard) return;
 
     const fetchPreguntas = async () => {
@@ -116,6 +123,7 @@ function SelfAssessment() {
 
   return (
     <div className="auto-container">
+      <button className="volver" onClick={() => navigate("/auditor")}>Volver al Panel</button>
       <h2>Autoevaluación - {standard}</h2>
 
       <div className="standard-selector">
@@ -180,12 +188,6 @@ function SelfAssessment() {
           Enviar autoevaluación
         </button>
       </form>
-
-      <div className="buttons-container">
-        <button className="volver" onClick={() => navigate("/auditor")}>
-          Volver al Panel del auditor
-        </button>
-      </div>
 
       {mensaje !== '' ? (<p className="msg">{mensaje}</p>) : (<span />)}
     </div>

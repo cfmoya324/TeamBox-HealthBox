@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "../styles/AdminPreguntas.css";
 
 function AdminPreguntas() {
@@ -14,6 +15,7 @@ function AdminPreguntas() {
   });
   const [editandoId, setEditandoId] = useState(null);
   const [edicion, setEdicion] = useState({});
+  const navigate = useNavigate();
 
   const fetchPreguntas = async () => {
     try {
@@ -151,6 +153,7 @@ function AdminPreguntas() {
 
   return (
     <div className="admin-preguntas-container">
+      <button className="volver" onClick={() => navigate("/administrador")}>Volver al Panel</button>
       <h2>Gestión de Preguntas de Autoevaluación</h2>
 
       <div className="crear-form">
