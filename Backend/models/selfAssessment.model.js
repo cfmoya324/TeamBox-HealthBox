@@ -4,7 +4,7 @@ const QuestionSchema = new mongoose.Schema({
   text: String,
   isAnswered: Boolean,
   type: { type: String, enum: ["abierta", "si_no", "escala"], default: "si_no" },
-  standard: { type: String, enum: ['ISO 45001', 'ISO 9001', 'ISO 27001'], default: "ISO 45001"},
+  standard: { type: String, required: true },
   response: String,
 });
 
