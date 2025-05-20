@@ -1,23 +1,22 @@
 .admin-container {
   padding: 2rem;
-  font-family: 'Segoe UI', sans-serif;
-  max-width: 1000px;
-  margin: auto;
-  border-radius: 12px;
+  background-color: #F3F3F3;
+  margin: 80px 10px;
+  border-radius: 2.5rem;
 }
 
 .admin-title {
   font-size: 26px;
   margin-bottom: 1.5rem;
   text-align: center;
-  color: #2c3e50;
 }
 
 .admin-input {
+  background-color: white;
   padding: 10px;
   margin: 5px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #D9D9D9;
+  border-radius: 10px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -26,14 +25,17 @@
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 2rem;
+  font-size: 0.7rem;
 }
 
 .admin-table th,
 .admin-table td {
-  border: 1px solid #ccc;
-  padding: 10px 12px;
+  border: 1px solid #D9D9D9;
+  padding: 0.2rem;
+  max-width: 80px;
   text-align: left;
-  background-color: #fff;
+  word-wrap: break-word;
+  background-color: white;
 }
 
 .admin-table th {
@@ -41,23 +43,17 @@
   color: #2c3e50;
 }
 
-.admin-actions button {
-  margin-right: 5px;
-  padding: 6px 12px;
-  font-size: 14px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
 .editar {
   background-color: #ffc107;
   color: white;
   margin-left: 5px;
   padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.editar:hover {
+  background-color: #b98b01;
 }
 
 .eliminar {
@@ -65,9 +61,12 @@
   color: white;
   margin-left: 5px;
   padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.eliminar:hover {
+  background-color: #991c28;
 }
 
 .guardar {
@@ -75,23 +74,31 @@
   color: white;
   margin-left: 5px;
   padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.guardar:hover {
+  background-color: #26833b;
 }
 
 .crear {
   background-color: #007bff;
   color: white;
+  font-size: 1.5rem;
+  font-weight: 500;
   padding: 10px 20px;
   margin-top: 10px;
-  border: none;
-  border-radius: 5px;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.crear:hover {
+  background-color: #0f57a5;
 }
 
 .admin-form {
-  max-width: 400px;
-  margin: auto;
+  margin: 10px;
 }
 
 .password-wrapper {
@@ -113,9 +120,12 @@
   color: white;
   margin-left: 5px;
   padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.cancelar:hover {
+  background-color: #991c28;
 }
 
 .volver {
@@ -126,4 +136,51 @@
   margin-top: 15px;
   cursor: pointer;
   border-radius: 5px;
+}
+
+@media only screen and (min-width: 768px) {
+  .admin-container {
+    max-width: 500px;
+    margin: 80px auto;
+  }
+  .admin-form {
+    max-width: 400px;
+    margin: auto;
+  }
+  .editar, .eliminar, .cancelar, .guardar {
+    width: 95%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .admin-container {
+    max-width: 600px;
+  }
+  .admin-form {
+    max-width: 500px;
+  }
+  .admin-table {
+    font-size: 1rem;
+  }
+  .admin-table th,
+  .admin-table td {
+    padding: 1rem;
+    max-width: unset;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .admin-container {
+    max-width: 750px;
+  }
+  .admin-form {
+    max-width: 600px;
+  }
+  .admin-table th,
+  .admin-table td {
+    word-wrap: normal;
+  }
+  .editar, .eliminar {
+    width: 46%;
+  }
 }

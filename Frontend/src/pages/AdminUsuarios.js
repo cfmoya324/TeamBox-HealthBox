@@ -161,7 +161,7 @@ export default function AdminUsuarios({isSidePanelOpen}) {
                           role: usuario.role
                         });
                       }}>Editar</button>
-                      <button className="eliminar" onClick={() => eliminarUsuario(usuario._id)}>Eliminar</button>
+                      <button className="eliminar" onClick={() => eliminarUsuario(usuario._id)}>Borrar</button>
                     </>
                   )}
                 </td>
