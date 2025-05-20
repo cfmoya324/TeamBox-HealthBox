@@ -183,8 +183,11 @@ function AdminPreguntas({isSidePanelOpen}) {
             <option value="abierta">Abierta</option>
             <option value="escala">Escala</option>
           </select>
-          <button onClick={crearPregunta}>Crear</button>
+          <button onClick={crearPregunta}>Crear Pregunta</button>
+        </div>
 
+        <div className="crear-form">
+        <h3>Agregar Nueva Normativa</h3>
           <div className="nueva-normativa">
             <input
               type="text"
@@ -197,7 +200,7 @@ function AdminPreguntas({isSidePanelOpen}) {
         </div>
 
         <div className="normativas-section">
-          <h4>Editar o Eliminar Normativas</h4>
+          <h3>Editar o Eliminar Normativas</h3>
           {normativas.map((norma, index) => (
             <div className="normativa-item" key={index}>
               <input
@@ -248,16 +251,15 @@ function AdminPreguntas({isSidePanelOpen}) {
                   </>
                 ) : (
                   <>
-                    <strong>[{p.standard}]</strong> {p.text} <em>({p.type})</em>
-                    <button
-                      onClick={() => {
-                        setEditandoId(p._id);
-                        setEdicion(p);
-                      }}
-                    >
-                      Editar
-                    </button>
-                    <button onClick={() => eliminarPregunta(p._id)}>Eliminar</button>
+                    <strong>[Normativa {p.standard}]</strong> {p.text} <em>Tipo de pregunta: {p.type}</em>
+                    <div>
+                      <button onClick={() => {
+                          setEditandoId(p._id);
+                          setEdicion(p);}} >
+                        Editar
+                      </button>
+                      <button onClick={() => eliminarPregunta(p._id)}>Eliminar</button>
+                    </div>
                   </>
                 )}
               </div>
