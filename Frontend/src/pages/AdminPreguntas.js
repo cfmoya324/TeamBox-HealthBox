@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import Sidepanel from "../components/sidepanel";
 import "../styles/AdminPreguntas.css";
 
-function AdminPreguntas() {
+function AdminPreguntas({isSidePanelOpen}) {
   const [preguntas, setPreguntas] = useState([]);
   const [normativas, setNormativas] = useState([]);
   const [selectedStandard, setSelectedStandard] = useState("ISO 45001");
@@ -15,7 +15,6 @@ function AdminPreguntas() {
   });
   const [editandoId, setEditandoId] = useState(null);
   const [edicion, setEdicion] = useState({});
-  const navigate = useNavigate();
 
   const fetchPreguntas = async () => {
     try {
@@ -152,116 +151,118 @@ function AdminPreguntas() {
   };
 
   return (
-    <div className="admin-preguntas-container">
-      <button className="volver" onClick={() => navigate("/administrador")}>Volver al Panel</button>
-      <h2>Gestión de Preguntas de Autoevaluación</h2>
+    <div>
+      <Sidepanel isSidePanelOpen={isSidePanelOpen}/>
+      <div className="admin-preguntas-container">
+        <h2>Gestión de Preguntas de Autoevaluación</h2>
 
-      <div className="crear-form">
-        <h3>Agregar Nueva Pregunta</h3>
-        <input
-          name="text"
-          value={nuevaPregunta.text}
-          onChange={handleInputChange}
-          placeholder="Texto de la pregunta"
-        />
-        <select
-          name="standard"
-          value={nuevaPregunta.standard}
-          onChange={(e) => {
-            handleInputChange(e);
-            setSelectedStandard(e.target.value);
-          }}
-        >
-          {normativas.map((n) => (
-            <option key={n._id} value={n.name}>
-              {n.name}
-            </option>
-          ))}
-        </select>
-        <select name="type" value={nuevaPregunta.type} onChange={handleInputChange}>
-          <option value="si_no">Sí / No</option>
-          <option value="abierta">Abierta</option>
-          <option value="escala">Escala</option>
-        </select>
-        <button onClick={crearPregunta}>Crear</button>
-
-        <div className="nueva-normativa">
+        <div className="crear-form">
+          <h3>Agregar Nueva Pregunta</h3>
           <input
-            type="text"
-            placeholder="Nueva normativa (ej: ISO 31000)"
-            value={nuevaNormativa}
-            onChange={(e) => setNuevaNormativa(e.target.value)}
+            name="text"
+            value={nuevaPregunta.text}
+            onChange={handleInputChange}
+            placeholder="Texto de la pregunta"
           />
-          <button onClick={agregarNormativa}>Agregar Normativa</button>
-        </div>
-      </div>
+          <select
+            name="standard"
+            value={nuevaPregunta.standard}
+            onChange={(e) => {
+              handleInputChange(e);
+              setSelectedStandard(e.target.value);
+            }}
+          >
+            {normativas.map((n) => (
+              <option key={n._id} value={n.name}>
+                {n.name}
+              </option>
+            ))}
+          </select>
+          <select name="type" value={nuevaPregunta.type} onChange={handleInputChange}>
+            <option value="si_no">Sí / No</option>
+            <option value="abierta">Abierta</option>
+            <option value="escala">Escala</option>
+          </select>
+          <button onClick={crearPregunta}>Crear</button>
 
-      <div className="normativas-section">
-        <h4>Editar o Eliminar Normativas</h4>
-        {normativas.map((norma, index) => (
-          <div className="normativa-item" key={index}>
+          <div className="nueva-normativa">
             <input
               type="text"
-              value={norma.name}
-              onChange={(e) => {
-                const actualizado = [...normativas];
-                actualizado[index].name = e.target.value;
-                setNormativas(actualizado);
-              }}
+              placeholder="Nueva normativa (ej: ISO 31000)"
+              value={nuevaNormativa}
+              onChange={(e) => setNuevaNormativa(e.target.value)}
             />
-            <button
-              className="actualizar"
-              onClick={() => actualizarNormativa(norma._id, norma.name)}
-            >
-              Actualizar
-            </button>
-            <button
-              className="eliminar"
-              onClick={() => {
-                if (window.confirm("¿Seguro que deseas eliminar esta normativa?")) {
-                  eliminarNormativa(norma._id);
-                }
-              }}
-            >
-              Eliminar
-            </button>
+            <button onClick={agregarNormativa}>Agregar Normativa</button>
           </div>
-        ))}
-      </div>
+        </div>
 
-      <div className="lista-preguntas">
-        <h3>Preguntas Registradas</h3>
-        {preguntas
-          .filter((p) => p.standard === selectedStandard)
-          .map((p) => (
-            <div key={p._id} className="pregunta-item">
-              {editandoId === p._id ? (
-                <>
-                  <input name="text" value={edicion.text} onChange={handleEditChange} />
-                  <select name="type" value={edicion.type} onChange={handleEditChange}>
-                    <option value="si_no">Sí / No</option>
-                    <option value="abierta">Abierta</option>
-                    <option value="escala">Escala</option>
-                  </select>
-                  <button onClick={() => actualizarPregunta(p._id)}>Guardar</button>
-                  <button onClick={() => setEditandoId(null)}>Cancelar</button>
-                </>
-              ) : (
-                <>
-                  <strong>[{p.standard}]</strong> {p.text} <em>({p.type})</em>
-                  <button
-                    onClick={() => {
-                      setEditandoId(p._id);
-                      setEdicion(p);
-                    }}
-                  >
-                    Editar
-                  </button>
-                  <button onClick={() => eliminarPregunta(p._id)}>Eliminar</button>
-                </>
-              )}
+        <div className="normativas-section">
+          <h4>Editar o Eliminar Normativas</h4>
+          {normativas.map((norma, index) => (
+            <div className="normativa-item" key={index}>
+              <input
+                type="text"
+                value={norma.name}
+                onChange={(e) => {
+                  const actualizado = [...normativas];
+                  actualizado[index].name = e.target.value;
+                  setNormativas(actualizado);
+                }}
+              />
+              <button
+                className="actualizar"
+                onClick={() => actualizarNormativa(norma._id, norma.name)}
+              >
+                Actualizar
+              </button>
+              <button
+                className="eliminar"
+                onClick={() => {
+                  if (window.confirm("¿Seguro que deseas eliminar esta normativa?")) {
+                    eliminarNormativa(norma._id);
+                  }
+                }}
+              >
+                Eliminar
+              </button>
             </div>
           ))}
+        </div>
+
+        <div className="lista-preguntas">
+          <h3>Preguntas Registradas</h3>
+          {preguntas
+            .filter((p) => p.standard === selectedStandard)
+            .map((p) => (
+              <div key={p._id} className="pregunta-item">
+                {editandoId === p._id ? (
+                  <>
+                    <input name="text" value={edicion.text} onChange={handleEditChange} />
+                    <select name="type" value={edicion.type} onChange={handleEditChange}>
+                      <option value="si_no">Sí / No</option>
+                      <option value="abierta">Abierta</option>
+                      <option value="escala">Escala</option>
+                    </select>
+                    <button onClick={() => actualizarPregunta(p._id)}>Guardar</button>
+                    <button onClick={() => setEditandoId(null)}>Cancelar</button>
+                  </>
+                ) : (
+                  <>
+                    <strong>[{p.standard}]</strong> {p.text} <em>({p.type})</em>
+                    <button
+                      onClick={() => {
+                        setEditandoId(p._id);
+                        setEdicion(p);
+                      }}
+                    >
+                      Editar
+                    </button>
+                    <button onClick={() => eliminarPregunta(p._id)}>Eliminar</button>
+                  </>
+                )}
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );

@@ -25,7 +25,6 @@ a {
 a:hover {
   color: #593964;
   background-color: rgba(179, 18, 243, 0.1);
-  transform: scale(1.05);
 }
 
 button {
@@ -41,9 +40,43 @@ nav {
   background-color: #F3F3F3;
   padding: 12px 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+aside {
+  background-color: #383542;
+  padding: 20px;
+  padding-top: 75px;
+  margin: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 300px;
+}
+
+aside > div {
+  display: flex;
+  flex-direction: column;
+}
+
+aside a {
+  color: white;
+  padding: 15px 10px;
+}
+
+aside a:hover {
+  color: #F3F3F3;
+  background-color: #593964;
 }
 
 select, textarea, input[type="range"] {
@@ -59,14 +92,39 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column; 
-    padding: 10px;
+.hideOnMobile {
+  display: none;
+}
+
+.hideOnDesktop {
+  display: unset;
+}
+
+.hideSidepanel {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .hideOnMobile {
+    display: unset;
   }
 
-  nav a {
-    font-size: 16px;
-    margin: 10px 0;
+  .hideOnDesktop {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .hideSidepanel {
+    display: unset;
+  }
+  aside {
+    width: 200px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  aside {
+    width: 300px;
   }
 }

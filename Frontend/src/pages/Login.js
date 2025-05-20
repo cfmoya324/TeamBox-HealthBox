@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/LoginAndRegister.css"; // Importa los estilos
 
-function Login() {
+function Login({setIsLoggedIn}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+
+  const handleLoginChange = useCallback(event => {
+      setIsLoggedIn(event)
+    }, [setIsLoggedIn])
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,26 +21,12 @@ function Login() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.role);
 
-      // 🔹 Redirigir según el rol del usuario
-      switch (res.data.role) {
-        case "administrador":
-          navigate("/administrador");
-          break;
-        case "auditor":
-          navigate("/auditor");
-          break;
-        case "supervisor":
-          navigate("/supervisor");
-          break;
-        case "trabajador":
-          navigate("/trabajador");
-          break;
-        default:
-          navigate("/dashboard"); // Redirección por defecto
-          break;
-      }
+      handleLoginChange(true); // Cambia el estado de "sesión iniciada" a verdadero.
+
+      navigate("/");
+
     } catch (error) {
-      alert("Error: Credenciales incorrectas");
+      alert("Error: Credenciales incorrectas.");
     }
   };
 

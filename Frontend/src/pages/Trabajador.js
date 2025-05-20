@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import Sidepanel from "../components/sidepanel";
 import "../styles/Trabajador.css";
 
-function Trabajador() {
+function Trabajador({isSidePanelOpen}) {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
   const [uploadedFiles, setUploadedFiles] = useState([]);
@@ -45,46 +46,49 @@ function Trabajador() {
   };
 
   return (
-    <div className="trabajador-container">
-      <h2>Panel de Trabajador</h2>
+    <div>
+      <Sidepanel isSidePanelOpen={isSidePanelOpen}/>
+      <div className="trabajador-container">
+        <h2>Panel de Trabajador</h2>
 
-      <div className="upload-section">
-        <p>Sube tus informes en PDF o XLSX:</p>
-        <input
-          type="file"
-          accept=".pdf,.xlsx"
-          onChange={handleFileChange}
-        />
-        {message && <p className="error-message">{message}</p>}
-        <button
-          className="subida-btn"
-          onClick={handleUpload}
-          disabled={!file}
-        >
-          Subir Archivo
-        </button>
-      </div>
+        <div className="upload-section">
+          <p>Sube tus informes en PDF o XLSX:</p>
+          <input
+            type="file"
+            accept=".pdf,.xlsx"
+            onChange={handleFileChange}
+          />
+          {message && <p className="error-message">{message}</p>}
+          <button
+            className="subida-btn"
+            onClick={handleUpload}
+            disabled={!file}
+          >
+            Subir Archivo
+          </button>
+        </div>
 
-      <div className="informe-section">
-        <h3>Informes Subidos: {uploadedFiles.length}</h3>
-        <ul>
-          {uploadedFiles.map((f) => (
-            <li key={f.id}>
-              <span className="informe-nombre">{f.name}</span>
-              <div className="informe-botones">
-                <a href={f.url} download={f.name}>
-                  <button className="descargar-btn">Descargar</button>
-                </a>
-                <button
-                  className="eliminar-btn"
-                  onClick={() => handleDelete(f.id)}
-                >
-                  Eliminar
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <div className="informe-section">
+          <h3>Informes Subidos: {uploadedFiles.length}</h3>
+          <ul>
+            {uploadedFiles.map((f) => (
+              <li key={f.id}>
+                <span className="informe-nombre">{f.name}</span>
+                <div className="informe-botones">
+                  <a href={f.url} download={f.name}>
+                    <button className="descargar-btn">Descargar</button>
+                  </a>
+                  <button
+                    className="eliminar-btn"
+                    onClick={() => handleDelete(f.id)}
+                  >
+                    Eliminar
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

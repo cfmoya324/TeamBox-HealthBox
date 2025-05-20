@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import Sidepanel from "../components/sidepanel";
 import "../styles/SelfAssessment.css";
 
-function SelfAssessment() {
+function SelfAssessment({isSidePanelOpen}) {
   const [standard, setStandard] = useState("");
   const [standards, setStandards] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [responses, setResponses] = useState({});
   const [mensaje, setMensaje] = useState("");
   const [enviarCorreo, setEnviarCorreo] = useState(false);
-  const navigate = useNavigate();
 
   const escalaLabels = ["Muy deficiente", "Deficiente", "Aceptable", "Bueno", "Excelente"];
 
@@ -37,13 +36,6 @@ function SelfAssessment() {
 
   // Cargar preguntas cada vez que cambie la normativa seleccionada
   useEffect(() => {
-    const role = localStorage.getItem("role");
-    if (role !== "auditor") {
-      alert("⚠️ Acceso denegado. Solo auditores pueden entrar.");
-      navigate("/");
-      return;
-    }
-
     if (!standard) return;
 
     const fetchPreguntas = async () => {
@@ -122,74 +114,76 @@ function SelfAssessment() {
   };
 
   return (
-    <div className="auto-container">
-      <button className="volver" onClick={() => navigate("/auditor")}>Volver al Panel</button>
-      <h2>Autoevaluación - {standard}</h2>
+    <div>
+      <Sidepanel isSidePanelOpen={isSidePanelOpen}/>
+      <div className="auto-container">
+        <h2>Autoevaluación - {standard}</h2>
 
-      <div className="standard-selector">
-        <span>Norma<br />escogida:</span>
-        <select value={standard} onChange={(e) => setStandard(e.target.value)}>
-          {standards.map((std) => (
-            <option key={std._id} value={std.name}>{std.name}</option>
-          ))}
-        </select>
-      </div>
-
-      <form onSubmit={handleSubmit} className="form-auto">
-        {questions.map((q, i) => (
-          <div key={i} className="question-block">
-            <label>{q.text}</label>
-            {q.type === "si_no" ? (
-              <select
-                value={responses[i] || ""}
-                onChange={(e) => handleChange(e, i)}
-              >
-                <option value="">Seleccione</option>
-                <option value="Sí">Sí</option>
-                <option value="No">No</option>
-              </select>
-            ) : q.type === "escala" ? (
-              <div className="scale-wrapper">
-                <input
-                  type="range"
-                  min="1"
-                  max="5"
-                  step="1"
-                  value={responses[i] || 3}
-                  onChange={(e) => handleChange(e, i)}
-                />
-                <div className="scale-labels">
-                  {escalaLabels.map((label, idx) => (
-                    <span key={idx} className="scale-label">{label}</span>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <textarea
-                value={responses[i] || ""}
-                onChange={(e) => handleChange(e, i)}
-              />
-            )}
-          </div>
-        ))}
-
-        <div>
-          <input
-            type="checkbox"
-            id="correo"
-            name="correo"
-            checked={enviarCorreo}
-            onChange={(e) => setEnviarCorreo(e.target.checked)}
-          />
-          <label htmlFor="correo"> Exportar evaluación a PDF y enviarlo a tu correo.</label>
+        <div className="standard-selector">
+          <span>Norma<br />escogida:</span>
+          <select value={standard} onChange={(e) => setStandard(e.target.value)}>
+            {standards.map((std) => (
+              <option key={std._id} value={std.name}>{std.name}</option>
+            ))}
+          </select>
         </div>
 
-        <button type="submit" className="submit-btn">
-          Enviar autoevaluación
-        </button>
-      </form>
+        <form onSubmit={handleSubmit} className="form-auto">
+          {questions.map((q, i) => (
+            <div key={i} className="question-block">
+              <label>{q.text}</label>
+              {q.type === "si_no" ? (
+                <select
+                  value={responses[i] || ""}
+                  onChange={(e) => handleChange(e, i)}
+                >
+                  <option value="">Seleccione</option>
+                  <option value="Sí">Sí</option>
+                  <option value="No">No</option>
+                </select>
+              ) : q.type === "escala" ? (
+                <div className="scale-wrapper">
+                  <input
+                    type="range"
+                    min="1"
+                    max="5"
+                    step="1"
+                    value={responses[i] || 3}
+                    onChange={(e) => handleChange(e, i)}
+                  />
+                  <div className="scale-labels">
+                    {escalaLabels.map((label, idx) => (
+                      <span key={idx} className="scale-label">{label}</span>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <textarea
+                  value={responses[i] || ""}
+                  onChange={(e) => handleChange(e, i)}
+                />
+              )}
+            </div>
+          ))}
 
-      {mensaje !== '' ? (<p className="msg">{mensaje}</p>) : (<span />)}
+          <div>
+            <input
+              type="checkbox"
+              id="correo"
+              name="correo"
+              checked={enviarCorreo}
+              onChange={(e) => setEnviarCorreo(e.target.checked)}
+            />
+            <label htmlFor="correo"> Exportar evaluación a PDF y enviarlo a tu correo.</label>
+          </div>
+
+          <button type="submit" className="submit-btn">
+            Enviar autoevaluación
+          </button>
+        </form>
+
+        {mensaje !== '' ? (<p className="msg">{mensaje}</p>) : (<span />)}
+      </div>
     </div>
   );
 }

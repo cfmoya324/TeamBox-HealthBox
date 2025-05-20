@@ -1,0 +1,52 @@
+.navSidepanelNLogo {
+    display: flex;
+    align-items: center;
+}
+
+.navSidepanel {
+    background-color: white;
+    border: 1px solid #D9D9D9;
+    color: black;
+    font-size: 1.2rem;
+    border-radius: 0.7rem;
+    padding: 5px 10px;
+}
+
+.navSidepanel:hover {
+    background-color: #D9D9D9;
+}
+
+.navLogo {
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.navCerrarSesion {
+    background-color: #383542;
+    border-radius: 1rem;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.navCerrarSesion:hover {
+    background-color: #593964;
+}
+
+@media only screen and (min-width: 768px) {
+    .navLogo {
+        padding-right: 10px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .navSidepanel {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    
+}

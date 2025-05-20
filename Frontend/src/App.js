@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/navbar";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -11,24 +11,37 @@ import Dashboard from "./pages/Dashboard";
 import AdminUsuarios from "./pages/AdminUsuarios";
 import SelfAssessment from "./pages/SelfAssessment";
 import AdminPreguntas from "./pages/AdminPreguntas";
+import NotFound from "./pages/notFound";
 
 function App() {
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token") !== null ? true:false);
+
+  const getRole = (role) => {
+    return localStorage.getItem('role') === role;
+  }
+
   return (
     <Router>
-      <Navbar />
+      <Navbar isSidePanelOpen={isSidePanelOpen} 
+        setIsSidePanelOpen={setIsSidePanelOpen} 
+        isLoggedIn={isLoggedIn} 
+        setIsLoggedIn={setIsLoggedIn} />
+
       <Routes>
-      <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={isLoggedIn ? <Dashboard /> : <Login />} />
+        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/administrador" element={<Admin />} />
         <Route path="/auditor" element={<Auditor />} />
         <Route path="/supervisor" element={<Supervisor />} />
         <Route path="/trabajador" element={<Trabajador />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/paneladmin" element={<AdminUsuarios />} />
-        <Route path="/paneltrabajador" element={<Trabajador />} /> {/* Nueva ruta */}
-        <Route path="/autoevaluacion" element={<SelfAssessment />} />
-        <Route path="/preguntas" element={<AdminPreguntas />} />
+        <Route path="/dashboard" element={isLoggedIn ? <Dashboard isSidePanelOpen={isSidePanelOpen}/>:<Navigate replace={true} to="/login"/>} />
+        <Route path="/paneladmin" element={isLoggedIn && getRole('administrador') ? <AdminUsuarios isSidePanelOpen={isSidePanelOpen}/>:<Navigate replace={true} to="/"/>} />
+        <Route path="/paneltrabajador" element={isLoggedIn && getRole('trabajador') ? <Trabajador isSidePanelOpen={isSidePanelOpen}/>:<Navigate replace={true} to="/"/>} />
+        <Route path="/autoevaluacion" element={isLoggedIn && getRole('auditor') ? <SelfAssessment isSidePanelOpen={isSidePanelOpen}/>:<Navigate replace={true} to="/"/>} />
+        <Route path="/preguntas" element={isLoggedIn && getRole('administrador') ? <AdminPreguntas isSidePanelOpen={isSidePanelOpen}/>:<Navigate replace={true} to="/"/>} />
+        <Route path="*" element={<NotFound/>} />
       </Routes>
     </Router>
   );

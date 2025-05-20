@@ -1,8 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Sidepanel from "../components/sidepanel";
 import "../styles/Dashboard.css"; 
 
-function Dashboard() {
+function Dashboard({isSidePanelOpen}) {
   const role = localStorage.getItem("role");
   const navigate = useNavigate();
 
@@ -13,9 +14,12 @@ function Dashboard() {
   };
 
   return (
-    <div className="dashboard-container">
-      <h2>Bienvenido, tu rol es: {role}</h2>
-      <button onClick={handleLogout}>Cerrar sesión</button>
+    <div>
+      <Sidepanel isSidePanelOpen={isSidePanelOpen}/>
+      <div className="dashboard-container">
+        <h2>Bienvenido, tu rol es: {role}</h2>
+        <button onClick={handleLogout}>Cerrar sesión</button>
+      </div>
     </div>
   );
 }
