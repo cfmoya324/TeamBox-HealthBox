@@ -1,5 +1,5 @@
 .admin-preguntas-container {
-  margin: 80px auto;
+  margin: 80px 10px;
   padding: 30px;
   background-color: #F3F3F3;
   border-radius: 2.5rem;
@@ -37,7 +37,7 @@
 
 .crear-form input {
   display: block;
-  width: 97%;
+  width: 94%;
   padding: 8px;
   margin: 8px 0;
   background-color: #F3F3F3;
@@ -144,6 +144,7 @@
 /* Elemento individual */
 .normativa-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 12px;
   margin-bottom: 15px;
@@ -167,6 +168,7 @@
   border-radius: 10px;
   font-size: 14px;
   transition: border 0.3s ease-in-out;
+  width: 94%;
 }
 
 /* Botones */
@@ -174,6 +176,7 @@
   padding: 8px 14px;
   border: none;
   border-radius: 12px;
+  width: 98%;
   font-size: 13px;
   font-weight: 500;
   transition: transform 0.2s, background-color 0.3s;
@@ -200,6 +203,19 @@
 @media only screen and (min-width: 768px) {
   .admin-preguntas-container {
     max-width: 500px;
+    margin: 80px auto;
+  }
+  .crear-form input {
+    width: 96%;
+  }
+  .normativa-item {
+    flex-direction: unset;
+  }
+  .normativa-item input[type="text"] {
+    width: unset;
+  }
+  .normativa-item button {
+    width: unset;
   }
   .pregunta-item > div > button {
     width: 47%;
@@ -226,6 +242,9 @@
     max-width: 750px;
   }
   .pregunta-item input {
+    width: 97%;
+  }
+  .crear-form input {
     width: 97%;
   }
 }
