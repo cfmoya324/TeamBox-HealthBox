@@ -1,0 +1,124 @@
+/* styles/planesAccion.css */
+
+.planes-container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #fdfdfd;
+}
+
+.planes-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.5rem;
+}
+
+.planes-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.planes-form input,
+.planes-form select {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+}
+
+.planes-form input:focus,
+.planes-form select:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.planes-form button {
+  padding: 0.75rem 1.25rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.planes-form button:hover {
+  background-color: #2980b9;
+}
+
+.planes-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.planes-table th,
+.planes-table td {
+  padding: 1rem;
+  text-align: left;
+}
+
+.planes-table th {
+  background-color: #3498db;
+  color: white;
+  font-weight: 600;
+}
+
+.planes-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.planes-table tr:hover {
+  background-color: #eef6fc;
+}
+
+.planes-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.planes-actions button {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.planes-actions .edit {
+  background-color: #f1c40f;
+  color: white;
+}
+
+.planes-actions .edit:hover {
+  background-color: #d4ac0d;
+}
+
+.planes-actions .delete {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.planes-actions .delete:hover {
+  background-color: #c0392b;
+}

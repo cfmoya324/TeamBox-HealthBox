@@ -1,0 +1,146 @@
+/* styles/gestionRiesgos.css */
+
+.gestion-riesgos-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fdfdfd;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.gestion-riesgos-container h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #3b82f6;
+  padding-bottom: 0.5rem;
+}
+
+form {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input[type="text"],
+input[type="file"],
+select,
+textarea {
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="file"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+button[type="submit"] {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s;
+  align-self: flex-start;
+}
+
+button[type="submit"]:hover {
+  background-color: #2563eb;
+}
+
+.historial-container {
+  margin-top: 2.5rem;
+}
+
+.historial-container h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #34495e;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.4rem;
+}
+
+.filtro-nivel {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.filtro-nivel label {
+  font-weight: 600;
+  margin-right: 0.5rem;
+  color: #475569;
+}
+
+.filtro-nivel select {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1.5px solid #cbd5e1;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.filtro-nivel select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+.riesgos-lista {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.riesgo-item {
+  background-color: #f1f5f9;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s ease;
+}
+
+.riesgo-item:hover {
+  background-color: #e2e8f0;
+}
+
+.riesgo-item p {
+  margin: 0.4rem 0;
+}
+
+.riesgo-item a {
+  color: #2563eb;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.riesgo-item a:hover {
+  color: #1d4ed8;
+}
+
+#Gestiontxt {
+  text-align: center;
+}

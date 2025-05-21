@@ -23,6 +23,8 @@ function Sidepanel({isSidePanelOpen}) {
                 <Link to="/autoevaluacion">Panel de autoevaluación del Auditor</Link>
                 <Link to="/paneltrabajador">Panel de Trabajador</Link>
                 <Link to="/supervisor">Supervisor</Link>
+                <Link to="/gestion-riesgos">Gestion de Riesgos</Link>
+                <Link to="/planes-accion">Planes de Acción</Link>
             </div>
         </aside>
     );
