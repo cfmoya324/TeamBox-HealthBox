@@ -1,69 +1,55 @@
-/* styles/gestionRiesgos.css */
-
 .gestion-riesgos-container {
-  max-width: 800px;
-  margin: 40px auto;
+  max-width: 900px;
+  margin: auto;
   padding: 30px;
-  background: #ffffff;
+  background-color: #fdfdfd;
   border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  font-family: "Segoe UI", sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .gestion-titulo {
-  text-align: center;
   font-size: 28px;
-  color: #333;
-  margin-bottom: 30px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .formulario-riesgos {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
+  margin-bottom: 30px;
 }
 
-.campo-formulario {
+.formulario-riesgos input,
+.formulario-riesgos select,
+.formulario-riesgos textarea,
+.formulario-riesgos button {
   padding: 10px;
-  border-radius: 8px;
+  font-size: 15px;
   border: 1px solid #ccc;
-  font-size: 16px;
+  border-radius: 6px;
+  font-family: inherit;
 }
 
-.boton-enviar {
-  padding: 12px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
+.formulario-riesgos button {
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background-color 0.2s ease;
 }
 
-.boton-enviar:hover {
-  background-color: #0056b3;
+.formulario-riesgos button:hover {
+  background-color: #218838;
 }
 
 .historial-container {
   margin-top: 40px;
 }
 
-.historial-titulo {
-  font-size: 22px;
-  color: #444;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #007bff;
-  padding-bottom: 5px;
-}
-
 .filtro-nivel {
   margin-bottom: 15px;
-}
-
-.filtro-nivel label {
-  margin-right: 10px;
-  font-weight: bold;
 }
 
 .riesgos-lista {
@@ -72,10 +58,40 @@
 }
 
 .riesgo-item {
-  background-color: #f1f9ff;
-  border: 1px solid #cce5ff;
-  border-radius: 8px;
+  background-color: #f4f6f7;
   padding: 15px;
-  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 12px;
 }
+
+.riesgo-item p {
+  margin: 5px 0;
+}
+
+.acciones {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.acciones button {
+  padding: 6px 10px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.acciones button:first-child {
+  background-color: #007bff;
+  color: white;
+}
+
+.acciones button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+
 
