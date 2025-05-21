@@ -28,6 +28,7 @@ function SelfAssessment({isSidePanelOpen}) {
         }
       } catch (error) {
         console.error("❌ Error al cargar normativas:", error);
+        alert('Sesión finalizada, por favor inicie sesión de nuevo.') // muy probablemente sea que el token expiró
       }
     };
 

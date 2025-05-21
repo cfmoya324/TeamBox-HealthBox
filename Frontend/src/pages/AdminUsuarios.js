@@ -24,6 +24,7 @@ export default function AdminUsuarios({isSidePanelOpen}) {
       setUsuarios(res.data);
     } catch (error) {
       console.error("❌ Error al cargar usuarios:", error);
+      alert('Sesión finalizada, por favor inicie sesión de nuevo.') // muy probablemente sea que el token expiró
     }
   };
 

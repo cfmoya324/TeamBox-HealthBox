@@ -35,6 +35,7 @@ function AdminPreguntas({isSidePanelOpen}) {
       setNormativas(res.data);
     } catch (error) {
       console.error("❌ Error al obtener normativas:", error);
+      alert('Sesión finalizada, por favor inicie sesión de nuevo.') // muy probablemente sea que el token expiró
     }
   };
 
