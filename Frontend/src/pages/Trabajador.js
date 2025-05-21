@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+//import axios from "axios";
 import Sidepanel from "../components/sidepanel";
+import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import "../styles/Trabajador.css";
 
 function Trabajador({isSidePanelOpen}) {
@@ -23,19 +25,33 @@ function Trabajador({isSidePanelOpen}) {
     }
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (file) {
       const newFile = {
         id: Date.now(),
         name: file.name,
         url: URL.createObjectURL(file),
       };
-      setUploadedFiles([...uploadedFiles, newFile]);
-      setFile(null);
-      setMessage("");
-      alert(`Archivo ${file.name} subido con éxito.`);
-    } else {
-      alert("No se ha seleccionado un archivo válido.");
+
+      try {
+        //await axios.post(
+        //  "http://localhost:5000/api/reports", newFile,
+        //  {
+        //    headers: {
+        //      Authorization: `Bearer ${localStorage.getItem("token")}`,
+        //    },
+        //  }
+        //);
+
+        setUploadedFiles([...uploadedFiles, newFile]);
+        setFile(null);
+
+        setMessage("");
+
+      } catch (error) {
+        console.error("❌ Error al guardar el reporte:", error);
+        alert("❌ Error al guardar el reporte.");
+      }
     }
   };
 
@@ -45,18 +61,40 @@ function Trabajador({isSidePanelOpen}) {
     }
   };
 
+  const dropHandler = (event) => {
+    event.preventDefault();
+
+    const files = event.dataTransfer.files;
+    const body = {target: {files: files}}
+
+    const fileInputToDropTo = document.getElementById('fileInputToDropTo');
+    fileInputToDropTo.files = files;
+
+    handleFileChange(body);
+  };
+
+  const dragoverHandler = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div>
       <Sidepanel isSidePanelOpen={isSidePanelOpen}/>
       <div className="trabajador-container">
         <h2>Panel de Trabajador</h2>
 
-        <div className="upload-section">
-          <p>Sube tus informes en PDF o XLSX:</p>
+        <p>Sube tus informes en archivos de PDF o XLSX:</p>
+
+        <div onDrop={dropHandler} onDragOver={dragoverHandler} className={file !== null ? "uploadZone uploadZoneFull hideOnMobile":"uploadZone uploadZoneEmpty hideOnMobile"}>
+          {file !== null ? <span><IoCheckmarkDoneSharp /></span>:'Suelta tu archivo aquí...'} 
+        </div>
+
+        <span>
           <input
             type="file"
             accept=".pdf,.xlsx"
             onChange={handleFileChange}
+            id="fileInputToDropTo"
           />
           {message && <p className="error-message">{message}</p>}
           <button
@@ -66,30 +104,32 @@ function Trabajador({isSidePanelOpen}) {
           >
             Subir Archivo
           </button>
-        </div>
+        </span>
 
-        <div className="informe-section">
-          <h3>Informes Subidos: {uploadedFiles.length}</h3>
-          <ul>
-            {uploadedFiles.map((f) => (
-              <li key={f.id}>
-                <span className="informe-nombre">{f.name}</span>
-                <div className="informe-botones">
-                  <a href={f.url} download={f.name}>
-                    <button className="descargar-btn">Descargar</button>
-                  </a>
-                  <button
-                    className="eliminar-btn"
-                    onClick={() => handleDelete(f.id)}
-                  >
-                    Eliminar
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <h3>Informes Subidos: {uploadedFiles.length}</h3>
       </div>
+
+      <div className="informe-section">
+        <ul>
+          {uploadedFiles.map((f) => (
+            <li key={f.id}>
+              <span className="informe-nombre">{f.name}</span>
+              <div className="informe-botones">
+                <a className="descargar-btn" href={f.url} download={f.name}>
+                  Descargar
+                </a>
+                <button
+                  className="eliminar-btn"
+                  onClick={() => handleDelete(f.id)}
+                >
+                  Eliminar
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
     </div>
   );
 }

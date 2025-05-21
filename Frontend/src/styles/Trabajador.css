@@ -1,35 +1,49 @@
 .trabajador-container {
+  margin: 20px 10px;
+  margin-top: 80px;
+  padding: 30px;
+  background-color: #F3F3F3;
+  border-radius: 2.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  height: 100vh;
-  padding: 20px;
+}
+
+.trabajador-container > * {
+  margin-bottom: 1rem;
 }
 
 /* Título */
 .trabajador-container h2 {
   font-size: 26px;
-  color: #2c3e50;
-  margin-bottom: 10px;
 }
 
 /* Descripción */
 .trabajador-container p {
   font-size: 18px;
-  color: #555;
   text-align: center;
-  margin-bottom: 15px;
 }
 
 /* Input para subir archivos */
 .trabajador-container input[type="file"] {
-  border: 1px solid #ccc;
+  display: inline;
+  border: 1px solid #D9D9D9;
+  width: 95%;
+  font-size: 18px;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 1rem;
   background-color: white;
   cursor: pointer;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
+}
+
+.trabajador-container input[type="file"]::file-selector-button {
+  border: 1px solid #D9D9D9;
+  background-color: #F3F3F3;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
 }
 
 /* Mensaje de error */
@@ -39,15 +53,17 @@
   margin-bottom: 10px;
 }
 
+
+
 /* Botón de subida */
 .subida-btn {
-  background-color: #3498db;
+  display: inline;
+  width: 100%;
+  background-color: #383542;
   color: white;
-  padding: 10px 15px;
+  padding: 17px 15px;
   font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 1rem;
   transition: background 0.3s ease-in-out;
 }
 
@@ -57,14 +73,39 @@
 }
 
 .subida-btn:hover:not(:disabled) {
-  background-color: #2980b9;
+  background-color: #593964;
 }
 
-.upload-section,
+
+
+.uploadZone {
+  text-align: center;
+  border-radius: 2rem;
+  margin: 10px;
+}
+
+.uploadZoneEmpty{
+  color: #D9D9D9;
+  font-size: 2rem;
+  padding: 7rem 0;
+  border: 2px dashed #D9D9D9;
+}
+
+.uploadZoneFull{
+  font-size: 2rem;
+  padding: 2rem 0;
+  background-color: #D9D9D9;
+  border: 2px dashed #383542;
+}
+
+
+
 .informe-section {
-  margin-top: 20px;
-  width: 100%;
-  max-width: 500px;
+  margin: 20px 10px;
+  padding: 30px;
+  background-color: #F3F3F3;
+  border-radius: 2.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .informe-section ul {
@@ -77,32 +118,40 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 10px;
+  background-color: white;
+  border: 2px solid #D9D9D9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  border-radius: 1rem;
+  margin-bottom: 20px;
 }
 
 .informe-nombre {
   flex: 1;
-  color: #2c3e50;
   font-weight: 500;
   overflow-wrap: anywhere;
 }
 
 .informe-botones {
   display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
-.informe-botones button {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 5px;
+.informe-botones button, .informe-botones a {
+  text-align: center;
+  width: 100px;
+  padding: 6px 0;
+  border-radius: 10px;
   color: white;
+  border: none;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 500;
+  font-size: 15px;
+  transition: background 0.3s ease;
 }
+
+
 
 .descargar-btn {
   background-color: #3498db;
@@ -118,4 +167,59 @@
 
 .eliminar-btn:hover {
   background-color: #c0392b;
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  .trabajador-container {
+    max-width: 500px;
+    margin: 20px auto;
+    margin-top: 80px;
+  }
+  .trabajador-container input[type="file"] {
+    width: 340px;
+    border-radius: 1rem 0 0 1rem;
+  }
+  .subida-btn {
+    width: unset;
+    border-radius: 0 1rem 1rem 0;
+  }
+  .uploadZone {
+    width: 450px;
+  }
+  .informe-section {
+    max-width: 500px;
+    margin: 20px auto;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .trabajador-container {
+    max-width: 600px;
+  }
+  .trabajador-container input[type="file"] {
+    width: 440px;
+  }
+  .uploadZone {
+    width: 550px;
+  }
+  .informe-section {
+    max-width: 600px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .trabajador-container {
+    max-width: 750px;
+  }
+  .trabajador-container input[type="file"] {
+    width: 590px;
+  }
+  .uploadZone {
+    width: 700px;
+  }
+  .informe-section {
+    max-width: 750px;
+  }
 }
