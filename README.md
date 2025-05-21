@@ -30,7 +30,7 @@ Recuerda añadir las credenciales de base de datos y de correo al backend.
 
 ## Estructura de la base de datos
 
-Se utilizan 4 colecciones en la base de datos del proyecto: users, standards, saquestions, y selfassessments.
+Se utilizan 6 colecciones en la base de datos del proyecto: users, standards, saquestions, selfassessments, riesgos y planaccions.
 
 ### users
 
@@ -76,6 +76,37 @@ type -> ["abierta", "si_no", "escala"]
   createdAt: Date
 }
 ```
+
+### riesgos
+
+```
+{
+  nombre: String,
+  tipo: String,
+  nivel: String,
+  area: String,
+  descripcion: String,
+  archivoUrl: String,
+  archivoNombre: String,
+  fecha: Date
+}
+```
+nivel -> ["bajo", "medio", "alto"]
+
+### planaccions
+
+```
+{
+  nombre: String,
+  responsable: String,
+  area: String,
+  descripcion: String,
+  estado: String,
+  fechaCompromiso: Date,
+  fecha: Date
+}
+```
+estado -> ["pendiente", "en progreso", "completado"]
 
 ## Estructura de la API
 

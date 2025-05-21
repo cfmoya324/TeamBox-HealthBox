@@ -1,6 +1,7 @@
 .gestion-riesgos-container {
-  max-width: 900px;
+  max-width: 600px;
   margin: auto;
+  margin-top: 80px;
   padding: 30px;
   background-color: #fdfdfd;
   border-radius: 12px;

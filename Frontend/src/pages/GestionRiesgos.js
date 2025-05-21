@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Sidepanel from "../components/sidepanel";
 import "../styles/GestionRiesgos.css";
 
-const GestionRiesgos = () => {
+const GestionRiesgos = ({isSidePanelOpen}) => {
   const [form, setForm] = useState({
     nombre: "",
     tipo: "",
@@ -22,6 +23,7 @@ const GestionRiesgos = () => {
       setRiesgos(res.data);
     } catch (err) {
       console.error("❌ Error al cargar riesgos", err);
+      alert('Sesión finalizada, por favor inicie sesión de nuevo.') // muy probablemente sea que el token expiró
     }
   };
 
@@ -103,58 +105,61 @@ const GestionRiesgos = () => {
   const riesgosFiltrados = filtroNivel ? riesgos.filter(r => r.nivel === filtroNivel) : riesgos;
 
   return (
-    <div className="gestion-riesgos-container">
-      <h1 className="gestion-titulo">Gestión de Riesgos Laborales</h1>
+    <div>
+      <Sidepanel isSidePanelOpen={isSidePanelOpen}/>
+      <div className="gestion-riesgos-container">
+        <h1 className="gestion-titulo">Gestión de Riesgos Laborales</h1>
 
-      <form onSubmit={handleSubmit} className="formulario-riesgos" encType="multipart/form-data">
-        <input name="nombre" value={form.nombre} onChange={handleChange} placeholder="Nombre del Riesgo" required />
-        <input name="tipo" value={form.tipo} onChange={handleChange} placeholder="Tipo de Riesgo" required />
-        <select name="nivel" value={form.nivel} onChange={handleChange} required>
-          <option value="bajo">Bajo</option>
-          <option value="medio">Medio</option>
-          <option value="alto">Alto</option>
-        </select>
-        <input name="area" value={form.area} onChange={handleChange} placeholder="Área Afectada" required />
-        <textarea name="descripcion" value={form.descripcion} onChange={handleChange} placeholder="Descripción detallada" maxLength={500} required />
-        <input type="file" name="archivo" onChange={handleChange} />
-        <button type="submit">{editandoId ? "Actualizar" : "Registrar"} Riesgo</button>
-      </form>
-
-      <div className="historial-container">
-        <h2>Historial de Riesgos</h2>
-        <div className="filtro-nivel">
-          <label>Filtrar por nivel:</label>
-          <select value={filtroNivel} onChange={(e) => setFiltroNivel(e.target.value)}>
-            <option value="">Todos</option>
+        <form onSubmit={handleSubmit} className="formulario-riesgos" encType="multipart/form-data">
+          <input name="nombre" value={form.nombre} onChange={handleChange} placeholder="Nombre del Riesgo" required />
+          <input name="tipo" value={form.tipo} onChange={handleChange} placeholder="Tipo de Riesgo" required />
+          <select name="nivel" value={form.nivel} onChange={handleChange} required>
             <option value="bajo">Bajo</option>
             <option value="medio">Medio</option>
             <option value="alto">Alto</option>
           </select>
-        </div>
+          <input name="area" value={form.area} onChange={handleChange} placeholder="Área Afectada" required />
+          <textarea name="descripcion" value={form.descripcion} onChange={handleChange} placeholder="Descripción detallada" maxLength={500} required />
+          <input type="file" name="archivo" onChange={handleChange} />
+          <button type="submit">{editandoId ? "Actualizar" : "Registrar"} Riesgo</button>
+        </form>
 
-        <ul className="riesgos-lista">
-          {riesgosFiltrados.map((r, index) => (
-            <li key={index} className="riesgo-item">
-              <p><strong>Nombre:</strong> {r.nombre}</p>
-              <p><strong>Tipo:</strong> {r.tipo}</p>
-              <p><strong>Nivel:</strong> {r.nivel}</p>
-              <p><strong>Área:</strong> {r.area}</p>
-              <p><strong>Descripción:</strong> {r.descripcion}</p>
-              {r.archivoUrl && (
-                <p>
-                  <strong>Archivo:</strong>{" "}
-                  <a href={r.archivoUrl} target="_blank" rel="noopener noreferrer">
-                    {r.archivoNombre}
-                  </a>
-                </p>
-              )}
-              <div className="acciones">
-                <button onClick={() => handleEdit(r)}>Editar</button>
-                <button onClick={() => handleDelete(r._id)}>Eliminar</button>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <div className="historial-container">
+          <h2>Historial de Riesgos</h2>
+          <div className="filtro-nivel">
+            <label>Filtrar por nivel:</label>
+            <select value={filtroNivel} onChange={(e) => setFiltroNivel(e.target.value)}>
+              <option value="">Todos</option>
+              <option value="bajo">Bajo</option>
+              <option value="medio">Medio</option>
+              <option value="alto">Alto</option>
+            </select>
+          </div>
+
+          <ul className="riesgos-lista">
+            {riesgosFiltrados.map((r, index) => (
+              <li key={index} className="riesgo-item">
+                <p><strong>Nombre:</strong> {r.nombre}</p>
+                <p><strong>Tipo:</strong> {r.tipo}</p>
+                <p><strong>Nivel:</strong> {r.nivel}</p>
+                <p><strong>Área:</strong> {r.area}</p>
+                <p><strong>Descripción:</strong> {r.descripcion}</p>
+                {r.archivoUrl && (
+                  <p>
+                    <strong>Archivo:</strong>{" "}
+                    <a href={r.archivoUrl} target="_blank" rel="noopener noreferrer">
+                      {r.archivoNombre}
+                    </a>
+                  </p>
+                )}
+                <div className="acciones">
+                  <button onClick={() => handleEdit(r)}>Editar</button>
+                  <button onClick={() => handleDelete(r._id)}>Eliminar</button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

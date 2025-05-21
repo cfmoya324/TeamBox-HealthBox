@@ -20,7 +20,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token") !== null);
 
   const getRole = (role) => {
-    return localStorage.getItem('role') === role;
+    return localStorage.getItem('role') === role || localStorage.getItem('role') === 'administrador';
   }
 
   return (
@@ -62,11 +62,11 @@ function App() {
         />
         <Route 
           path="/gestion-riesgos" 
-          element={isLoggedIn ? <GestionRiesgos isSidePanelOpen={isSidePanelOpen} /> : <Navigate replace={true} to="/login" />} 
+          element={isLoggedIn && getRole('supervisor') ? <GestionRiesgos isSidePanelOpen={isSidePanelOpen} /> : <Navigate replace={true} to="/login" />} 
         />
         <Route 
           path="/planes-accion" 
-          element={isLoggedIn ? <PlanesAccion isSidePanelOpen={isSidePanelOpen} /> : <Navigate replace={true} to="/login" />} 
+          element={isLoggedIn && getRole('supervisor') ? <PlanesAccion isSidePanelOpen={isSidePanelOpen} /> : <Navigate replace={true} to="/login" />} 
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
