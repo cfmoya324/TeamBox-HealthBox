@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "../styles/GestionRiesgos.css";
 
 const GestionRiesgos = () => {
@@ -13,6 +14,20 @@ const GestionRiesgos = () => {
 
   const [riesgos, setRiesgos] = useState([]);
   const [filtroNivel, setFiltroNivel] = useState("");
+  const [editandoId, setEditandoId] = useState(null);
+
+  const fetchRiesgos = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/api/riesgos");
+      setRiesgos(res.data);
+    } catch (err) {
+      console.error("❌ Error al cargar riesgos", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchRiesgos();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -23,102 +38,93 @@ const GestionRiesgos = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const archivo = form.archivo;
-    const archivoUrl = archivo ? URL.createObjectURL(archivo) : null;
 
-    const nuevoRiesgo = {
-      ...form,
-      fecha: new Date().toLocaleString(),
-      archivoUrl,
-    };
+    try {
+      const formData = new FormData();
+      formData.append("nombre", form.nombre);
+      formData.append("tipo", form.tipo);
+      formData.append("nivel", form.nivel);
+      formData.append("area", form.area);
+      formData.append("descripcion", form.descripcion);
+      if (form.archivo) {
+        formData.append("archivo", form.archivo);
+      }
 
-    setRiesgos([...riesgos, nuevoRiesgo]);
+      const config = { headers: { "Content-Type": "multipart/form-data" } };
 
-    setForm({
-      nombre: "",
-      tipo: "",
-      nivel: "bajo",
-      area: "",
-      descripcion: "",
-      archivo: null,
-    });
+      if (editandoId) {
+        await axios.put(`http://localhost:5000/api/riesgos/${editandoId}`, formData, config);
+        setEditandoId(null);
+      } else {
+        await axios.post("http://localhost:5000/api/riesgos", formData, config);
+      }
+
+      setForm({
+        nombre: "",
+        tipo: "",
+        nivel: "bajo",
+        area: "",
+        descripcion: "",
+        archivo: null,
+      });
+
+      fetchRiesgos();
+    } catch (err) {
+      console.error("❌ Error al guardar", err);
+      alert("❌ Error al guardar riesgo");
+    }
   };
 
-  const riesgosFiltrados = filtroNivel
-    ? riesgos.filter((r) => r.nivel === filtroNivel)
-    : riesgos;
+  const handleEdit = (riesgo) => {
+    setForm({
+      nombre: riesgo.nombre,
+      tipo: riesgo.tipo,
+      nivel: riesgo.nivel,
+      area: riesgo.area,
+      descripcion: riesgo.descripcion,
+      archivo: null, // No se puede precargar el archivo
+    });
+    setEditandoId(riesgo._id);
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm("¿Eliminar este riesgo?")) {
+      try {
+        await axios.delete(`http://localhost:5000/api/riesgos/${id}`);
+        fetchRiesgos();
+      } catch (err) {
+        console.error("❌ Error al eliminar riesgo", err);
+      }
+    }
+  };
+
+  const riesgosFiltrados = filtroNivel ? riesgos.filter(r => r.nivel === filtroNivel) : riesgos;
 
   return (
     <div className="gestion-riesgos-container">
       <h1 className="gestion-titulo">Gestión de Riesgos Laborales</h1>
 
-      <form onSubmit={handleSubmit} className="formulario-riesgos">
-        <input
-          name="nombre"
-          value={form.nombre}
-          onChange={handleChange}
-          placeholder="Nombre del Riesgo"
-          className="campo-formulario"
-          required
-        />
-        <input
-          name="tipo"
-          value={form.tipo}
-          onChange={handleChange}
-          placeholder="Tipo de Riesgo"
-          className="campo-formulario"
-          required
-        />
-        <select
-          name="nivel"
-          value={form.nivel}
-          onChange={handleChange}
-          className="campo-formulario"
-          required
-        >
+      <form onSubmit={handleSubmit} className="formulario-riesgos" encType="multipart/form-data">
+        <input name="nombre" value={form.nombre} onChange={handleChange} placeholder="Nombre del Riesgo" required />
+        <input name="tipo" value={form.tipo} onChange={handleChange} placeholder="Tipo de Riesgo" required />
+        <select name="nivel" value={form.nivel} onChange={handleChange} required>
           <option value="bajo">Bajo</option>
           <option value="medio">Medio</option>
           <option value="alto">Alto</option>
         </select>
-        <input
-          name="area"
-          value={form.area}
-          onChange={handleChange}
-          placeholder="Área Afectada"
-          className="campo-formulario"
-          required
-        />
-        <textarea
-          name="descripcion"
-          value={form.descripcion}
-          onChange={handleChange}
-          placeholder="Descripción detallada del riesgo"
-          className="campo-formulario"
-          maxLength={500}
-          required
-        />
-        <input
-          type="file"
-          name="archivo"
-          onChange={handleChange}
-          className="campo-formulario"
-        />
-        <button type="submit" className="boton-enviar">
-          Registrar Riesgo
-        </button>
+        <input name="area" value={form.area} onChange={handleChange} placeholder="Área Afectada" required />
+        <textarea name="descripcion" value={form.descripcion} onChange={handleChange} placeholder="Descripción detallada" maxLength={500} required />
+        <input type="file" name="archivo" onChange={handleChange} />
+        <button type="submit">{editandoId ? "Actualizar" : "Registrar"} Riesgo</button>
       </form>
 
       <div className="historial-container">
-        <h2 className="historial-titulo">Historial de Riesgos</h2>
-
+        <h2>Historial de Riesgos</h2>
         <div className="filtro-nivel">
           <label>Filtrar por nivel:</label>
-          <select
-            value={filtroNivel}
-            onChange={(e) => setFiltroNivel(e.target.value)}
-          >
+          <select value={filtroNivel} onChange={(e) => setFiltroNivel(e.target.value)}>
             <option value="">Todos</option>
             <option value="bajo">Bajo</option>
             <option value="medio">Medio</option>
@@ -126,33 +132,35 @@ const GestionRiesgos = () => {
           </select>
         </div>
 
-        {riesgosFiltrados.length === 0 ? (
-          <p>No hay riesgos registrados.</p>
-        ) : (
-          <ul className="riesgos-lista">
-            {riesgosFiltrados.map((r, index) => (
-              <li key={index} className="riesgo-item">
-                <p><strong>Nombre:</strong> {r.nombre}</p>
-                <p><strong>Tipo:</strong> {r.tipo}</p>
-                <p><strong>Nivel:</strong> {r.nivel}</p>
-                <p><strong>Área:</strong> {r.area}</p>
-                <p><strong>Descripción:</strong> {r.descripcion}</p>
-                <p><strong>Fecha:</strong> {r.fecha}</p>
-                {r.archivo && r.archivoUrl && (
-                  <p>
-                    <strong>Archivo:</strong>{" "}
-                    <a href={r.archivoUrl} download={r.archivo.name}>
-                      Descargar {r.archivo.name}
-                    </a>
-                  </p>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
+        <ul className="riesgos-lista">
+          {riesgosFiltrados.map((r, index) => (
+            <li key={index} className="riesgo-item">
+              <p><strong>Nombre:</strong> {r.nombre}</p>
+              <p><strong>Tipo:</strong> {r.tipo}</p>
+              <p><strong>Nivel:</strong> {r.nivel}</p>
+              <p><strong>Área:</strong> {r.area}</p>
+              <p><strong>Descripción:</strong> {r.descripcion}</p>
+              {r.archivoUrl && (
+                <p>
+                  <strong>Archivo:</strong>{" "}
+                  <a href={r.archivoUrl} target="_blank" rel="noopener noreferrer">
+                    {r.archivoNombre}
+                  </a>
+                </p>
+              )}
+              <div className="acciones">
+                <button onClick={() => handleEdit(r)}>Editar</button>
+                <button onClick={() => handleDelete(r._id)}>Eliminar</button>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
 };
 
 export default GestionRiesgos;
+
+
+

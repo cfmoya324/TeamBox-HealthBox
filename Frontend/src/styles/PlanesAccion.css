@@ -1,62 +1,52 @@
-/* styles/planesAccion.css */
-
 .planes-container {
-  max-width: 800px;
-  margin: 40px auto;
+  max-width: 900px;
+  margin: auto;
   padding: 30px;
-  background: #ffffff;
+  background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  font-family: "Segoe UI", sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .titulo {
-  text-align: center;
   font-size: 28px;
-  color: #333;
-  margin-bottom: 30px;
+  color: #34495e;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .formulario {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
+  margin-bottom: 30px;
 }
 
 .formulario input,
+.formulario select,
 .formulario textarea,
-.formulario select {
+.formulario button {
   padding: 10px;
-  border-radius: 8px;
+  font-size: 15px;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  font-size: 16px;
+  font-family: inherit;
 }
 
 .formulario button {
-  padding: 12px;
-  font-size: 16px;
-  background-color: #28a745;
-  color: #fff;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
   border: none;
-  border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background-color 0.2s ease;
 }
 
 .formulario button:hover {
-  background-color: #218838;
+  background-color: #0056b3;
 }
 
 .historial {
   margin-top: 40px;
-}
-
-.historial h2 {
-  font-size: 22px;
-  color: #444;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #28a745;
-  padding-bottom: 5px;
 }
 
 .acciones-lista {
@@ -65,17 +55,46 @@
 }
 
 .accion-item {
-  background-color: #f3fff3;
-  border: 1px solid #bdf0bd;
-  border-radius: 8px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
   padding: 15px;
-  margin-bottom: 15px;
+  border-radius: 8px;
+  margin-bottom: 12px;
 }
 
-.select-estado {
-  margin-top: 8px;
-  padding: 6px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+.accion-item p {
+  margin: 5px 0;
 }
+
+.accion-item select {
+  margin-top: 5px;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+.acciones {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.acciones button {
+  padding: 6px 10px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.acciones button:first-child {
+  background-color: #28a745;
+  color: white;
+}
+
+.acciones button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+
 
