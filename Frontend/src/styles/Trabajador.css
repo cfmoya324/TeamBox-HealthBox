@@ -126,6 +126,10 @@
   margin-bottom: 20px;
 }
 
+.informe-section-hidden {
+  display: none;
+}
+
 .informe-nombre {
   flex: 1;
   font-weight: 500;

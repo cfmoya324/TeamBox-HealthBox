@@ -96,7 +96,6 @@ function Trabajador({isSidePanelOpen}) {
             onChange={handleFileChange}
             id="fileInputToDropTo"
           />
-          {message && <p className="error-message">{message}</p>}
           <button
             className="subida-btn"
             onClick={handleUpload}
@@ -104,12 +103,14 @@ function Trabajador({isSidePanelOpen}) {
           >
             Subir Archivo
           </button>
+          {message && <p className="error-message">{message}</p>}
         </span>
 
         <h3>Informes Subidos: {uploadedFiles.length}</h3>
       </div>
 
-      <div className="informe-section">
+      <div className={uploadedFiles.length !== 0 ? "informe-section":'informe-section-hidden'}>
+        <h2>Lista de Informes Subidos</h2>
         <ul>
           {uploadedFiles.map((f) => (
             <li key={f.id}>

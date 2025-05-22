@@ -62,11 +62,11 @@ function App() {
         />
         <Route 
           path="/gestion-riesgos" 
-          element={isLoggedIn && getRole('supervisor') ? <GestionRiesgos isSidePanelOpen={isSidePanelOpen} /> : <Navigate replace={true} to="/login" />} 
+          element={isLoggedIn && getRole('supervisor') ? <GestionRiesgos isSidePanelOpen={isSidePanelOpen} /> : <Navigate replace={true} to="/" />} 
         />
         <Route 
           path="/planes-accion" 
-          element={isLoggedIn && getRole('supervisor') ? <PlanesAccion isSidePanelOpen={isSidePanelOpen} /> : <Navigate replace={true} to="/login" />} 
+          element={isLoggedIn && getRole('supervisor') ? <PlanesAccion isSidePanelOpen={isSidePanelOpen} /> : <Navigate replace={true} to="/" />} 
         />
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -158,3 +158,30 @@ Existen 5 rutas principales de la API: auth, users, standards, questions, y self
 **POST** -> */* -> Crea una autoevaluación.
 
 **POST** -> */export* -> Genera el PDF de una autoevaluación y se envia al correo del usuario que ha iniciado sesión.
+
+## Imágenes
+
+Página de súbida de informes del trabajador:
+
+![Página de súbida de informes del trabajador](./screenshots/Screenshot_20250521_200759.png)
+
+Página de gestión de usuarios del administrador:
+
+![Página de gestión de usuarios del administrador](./screenshots/Screenshot_20250521_201958.png)
+
+Página de creación de autoevaluaciones del auditor:
+
+![Página de creación de autoevaluaciones del auditor](./screenshots/Screenshot_20250521_195709.png)
+
+
+Página de creación de autoevaluaciones del auditor:
+
+![Página de creación de autoevaluaciones del auditor](./screenshots/Screenshot_20250521_200120.png)
+
+Página de gestión de preguntas y normativas del administrador:
+
+![Página de gestión de preguntas y normativas del administrador](./screenshots/Screenshot_20250521_201127.png)
+
+Página de inicio de sesión de HealthBox:
+
+![Página de gestión de preguntas y normativas del administrador](./screenshots/Screenshot_20250521_194910.png)
